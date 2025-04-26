@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>البحث عن سيارة مفقودة</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"] {
+            width: 70%;
+            padding: 10px;
+            font-size: 16px;
+            margin-right: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e7f5e7;
+            border: 1px solid #b2d8b2;
+            border-radius: 5px;
+        }
+        .result img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .result p {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>البحث عن سيارة مفقودة</h2>
+        <input type="text" id="plateNumber" placeholder=" أدخل رقم اللوحة او رقم الهيكل">
+        <button onclick="searchCar()">ابحث</button>
+
+        <div id="result" class="result" style="display:none;">
+            <img id="carImage" src="" alt="صورة السيارة">
+            <p id="locationText"></p>
+        </div>
+    </div>
+
+    <script>
+        function searchCar() {
+            const plateNumber = document.getElementById('plateNumber').value;
+            
+            // محاكاة بيانات من قاعدة البيانات
+            const carsDatabase = [
+                { plate: '79618', image: 'images/car1.jpg', location: 'اركويت محطة الخيمة' },
+                { plate: '61759', image: 'images/car2.jpg', location: 'امدرمان المهندسين' },
+                { plate: '789LMN', image: 'images/car3.jpg', location: 'الدمام - شارع الأمير نايف' }
+            ];
+
+            const car = carsDatabase.find(c => c.plate === plateNumber);
+            
+            if (car) {
+                document.getElementById('carImage').src = car.image;
+                document.getElementById('locationText').textContent = 'الموقع: ' + car.location;
+                document.getElementById('result').style.display = 'block';
+            } else {
+                alert('رقم اللوحة غير موجود');
+                document.getElementById('result').style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
